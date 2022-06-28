@@ -1,6 +1,6 @@
 import password_creator as p  # importing password_creator file
 
-p1 = p.password()
+p1 = p.Password_Creator()
 password = ""
 
 p1.set_has_letters(input("Does password have letters (Y/N)? ").upper() == "Y")
@@ -18,12 +18,6 @@ while not p1.valid_must_include(must_include):
     must_include = input("Invalid phrase! Enter another phrase (NA if none): ")
 
 p1.set_must_include(must_include)
-# p1.set_has_numbers(True)
-# p1.set_has_letters(True)
-# p1.set_has_symbols(Tr
-# ue)
-# p1.set_length(15)
-# p1.set_must_include("hello")
 create_new_password = True
 
 while create_new_password:

@@ -1,17 +1,29 @@
 import random as r
+import validators
 
+class Password_Creator:
 
-class password:
+    """
+    Class Variables
+    """
     password = ""
     length = 0
+    email = ""
+    wesbite_url = ""
+
     has_letters = False
     has_numbers = False
     has_symbols = False
     has_must_include = False
     must_include = ""
+
+    f = open("passwords.csv", "w")
     valid_characters = []
 
 
+    """
+    Class Setters
+    """
     # sets has letters as true
     def set_has_letters(self, boolean):
         self.has_letters = boolean
@@ -26,14 +38,37 @@ class password:
 
     # sets phrase that must be included
     def set_must_include(self, string):
-        if string != "NA":
+        if string != "NA" and self.valid_must_include(string):
             self.has_must_include = True
             self.must_include = string
+            return "Valid Must Included String"
+        return "Invalid Must Included String, Try Again"
 
     # sets length of password
     def set_length(self, length):
-        self.length = length
+        if(self.valid_length(length)):
+            self.length = length
+            return "Valid Length"
+        return "Invalid Length, Try Again"
 
+    # sets website url for password
+    def set_website_url(self, url):
+        if(self.valid_website_url(url)):
+            self.wesbite_url = url
+            return "Valid Website URL"
+        return "Invalid Website URL, Try Again"
+
+    # sets email for password
+    def set_email(self, email):
+        if(self.valid_email(email)):
+            self.email = email
+            return "Valid Email"
+        return "Invalid Email, Try Again"
+
+
+    """
+    Checks if variable exists
+    """
     # returns True if must_include is valid
     def valid_must_include(self, string):
         return len(string) <= self.length
@@ -51,6 +86,27 @@ class password:
         if self.has_symbols:
             self.valid_characters.append("symbols")
 
+    # checks if the email is valid (no spaces, has @, no illegal characters)
+    def valid_email(self, email):
+        if ("@" in email) and (" " not in email) and (len(email) >= 64 and len(email) > 0):
+            for i in "!#$%&'*+-/=?^_`{|}~(),:;<>@[\]":
+                if i in email:
+                    return False
+            for i in range(10):
+                if i in email:
+                    return False
+            return True
+        else:
+            return False
+
+    # checks if the website url is valid
+    def valid_website_url(self, url):
+        return validators.url(url)
+
+
+    """
+    Adds to variable
+    """
     # adds letters to password
     def add_letters(self):
         letters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
@@ -74,7 +130,11 @@ class password:
         elif character == "symbols":
             return self.add_symbols()
 
-    # returns password randomly based on options chosen
+
+    """
+    Creates a password according to the specifications above made by the user
+    :returns the self.password variable 
+    """
     def create_password(self):
         self.password = ""
         self.valid_characters = []
@@ -95,4 +155,24 @@ class password:
             self.password = 12345678  # default password
 
         return self.password
-    #
+
+
+    """
+    Save/delete password
+    """
+    # saves password to password.txt
+    def save_password(self):
+        pass
+
+    # deletes password from password.txt using password, website, or email
+    def delete_password(self):
+        pass
+
+    # checks if password exists using password, website or email
+    def password_exists(self, str):
+        pass
+
+
+
+
+
