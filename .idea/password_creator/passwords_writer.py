@@ -124,3 +124,10 @@ class passwords_writer:
             return column
         else:
             return "Column list is empty"
+
+    # checks for duplicate passwords
+    def has_duplicates(self, url):
+        for i in self.pd_col_reader["URLs"]:
+            if i == url:
+                return True
+        return False

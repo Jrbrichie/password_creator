@@ -1,5 +1,5 @@
-import random as r
-import validators
+import csv, random as r, validators
+import passwords_writer
 
 class Password_Creator:
 
@@ -17,7 +17,9 @@ class Password_Creator:
     has_must_include = False
     must_include = ""
 
+    pw = password_writer()
     f = open("passwords.csv", "w")
+    writer = csv.writer(f)
     valid_characters = []
 
 
@@ -157,20 +159,12 @@ class Password_Creator:
         return self.password
 
 
-    """
-    Save/delete password
-    """
     # saves password to password.txt
-    def save_password(self):
-        pass
+    def save_password(self, password, email, url):
+        if(not self.pw.has_duplicates(url)):
+            self.writer.writerow(password + "," + email + "," + url)
+            return "Password saved successfully"
 
-    # deletes password from password.txt using password, website, or email
-    def delete_password(self):
-        pass
-
-    # checks if password exists using password, website or email
-    def password_exists(self, str):
-        pass
 
 
 
