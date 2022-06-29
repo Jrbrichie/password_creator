@@ -1,5 +1,5 @@
 import csv, random as r, validators
-import passwords_writer
+import passwords_writer as p
 
 class Password_Creator:
 
@@ -17,7 +17,7 @@ class Password_Creator:
     has_must_include = False
     must_include = ""
 
-    pw = password_writer()
+    pw = p.Passwords_Writer()
     f = open("passwords.csv", "w")
     writer = csv.writer(f)
     valid_characters = []
@@ -27,16 +27,31 @@ class Password_Creator:
     Class Setters
     """
     # sets has letters as true
-    def set_has_letters(self, boolean):
-        self.has_letters = boolean
+    def set_has_letters(self, str):
+        if(str.upper() == "Y"):
+            self.has_letters = True
+        elif(str.upper() == "N"):
+            self.has_letters = False
+        else:
+            print("Invalid choice, try again")
 
-    # sets had numbers as true
-    def set_has_numbers(self, boolean):
-        self.has_numbers = boolean
+    # sets has numbers as true
+    def set_has_numbers(self, str):
+        if(str.upper() == "Y"):
+            self.has_numbers = True
+        elif(str.upper() == "N"):
+            self.has_numbers = False
+        else:
+            print("Invalid choice, try again")
 
-    # sets symbols as true
-    def set_has_symbols(self, boolean):
-        self.has_symbols = boolean
+    # sets has symbols as true
+    def set_has_symbols(self, str):
+        if(str.upper() == "Y"):
+            self.has_symbols = True
+        elif(str.upper() == "N"):
+            self.has_symbols = False
+        else:
+            print("Invalid choice, try again")
 
     # sets phrase that must be included
     def set_must_include(self, string):
@@ -164,6 +179,50 @@ class Password_Creator:
         if(not self.pw.has_duplicates(url)):
             self.writer.writerow(password + "," + email + "," + url)
             return "Password saved successfully"
+
+    """
+    Sets choices and executes functions
+    """
+    # sets choice and executes the right functions
+    def choice(self, choice):
+        [self.set_website_url(input("Enter the URL: ")),
+         self.set_email(input("Enter the Email: ")),
+         input("What information would you like to change?\n"
+               "(1) Password\n"
+               "(2) All Same Passwords\n"
+               "(3) Email\n"
+               "(4) All Same Emails\n"
+               "(5) Wesbite URL\n"
+               "(6) All Same Wesbite URLs\n")]
+
+    # executes editing functions
+    def change(self, choice):
+        choices = [self.pw.edit_element(input("Enter new", word, ": "), input("Enter the URL: "), word + "s"),
+                   self.pw.edit_same_element(input("Enter new", word, ": "), input("Enter the old", word, ": "), word + "s")]
+
+        if(choice == 1):
+            word = "Password"
+            choices[0]
+        elif(choice == 2):
+            word = "Password"
+            choices[1]
+        elif(choice == 3):
+            word = "Email"
+            choices[0]
+        elif(choice == 4):
+            word = "Email"
+            choices[1]
+        elif(choice == 5):
+            word = "URL"
+            choices[0]
+        elif(choice == 6):
+            word = "URL"
+            choices[1]
+        else:
+            print("Invalid Choice, try again")
+
+
+
 
 
 

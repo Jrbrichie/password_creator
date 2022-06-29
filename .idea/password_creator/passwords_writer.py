@@ -1,6 +1,6 @@
 import csv, password_creator, password_creator_gui, passwords.csv, pandas as pd
 
-class passwords_writer:
+class Passwords_Writer:
 
     """
     Class Varibles

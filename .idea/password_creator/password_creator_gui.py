@@ -3,14 +3,13 @@ import password_creator as p  # importing password_creator file
 p1 = p.Password_Creator()
 password = ""
 
-p1.set_has_letters(input("Does password have letters (Y/N)? ").upper() == "Y")
-p1.set_has_numbers(input("Does password have numbers (Y/N)? ").upper() == "Y")
-p1.set_has_symbols(input("Does password have symbols (Y/N)? ").upper() == "Y")
+p1.set_has_letters(input("Does password have letters (Y/N)? "))
+p1.set_has_numbers(input("Does password have numbers (Y/N)? "))
+p1.set_has_symbols(input("Does password have symbols (Y/N)? "))
 
 length = int(input("Enter the length of the password: "))
 while not p1.valid_length(length):
     length = int(input("Invalid length! Enter another length: "))
-
 p1.set_length(length)
 
 must_include = input("Enter a phrase you want to include in the password (NA if none): ")
@@ -27,6 +26,18 @@ while create_new_password:
 
 print("\nYour password is:", p1.password)
 
+
+exit = False
+
+while not exit:
+    input("What would you like to do?\n"
+          "(1) Set Website URL for this password\n"
+          "(2) Set Email for this password\n"
+          "(3) Change information\n"
+          "(4) Get Information\n"
+          "(5) Delete Information"
+          "(6) Save Password\n"
+          "(0) Exit\n")
 
 
 
