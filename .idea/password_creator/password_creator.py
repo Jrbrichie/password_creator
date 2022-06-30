@@ -193,7 +193,19 @@ class Password_Creator:
                "(3) Email\n"
                "(4) All Same Emails\n"
                "(5) Wesbite URL\n"
-               "(6) All Same Wesbite URLs\n")]
+               "(6) All Same Wesbite URLs\n"),
+         input("What information would you like to get?"
+               "(1) Password"
+               "(2) All Same Passwords"
+               "(3) All Passwords"
+               "(4) Email"
+               "(5) All Same Emails"
+               "(6) All Emails"
+               "(7) URL"
+               "(8) All Same URLs"
+               "(9) All URLs"
+               "(10) Everything"
+               )]
 
     # executes editing functions
     def change(self, choice):
@@ -220,6 +232,36 @@ class Password_Creator:
             choices[1]
         else:
             print("Invalid Choice, try again")
+
+    # executes getting fucntions
+    def get(self, choice):
+        choices = [self.pw.get_password_combination(input("Enter a URL: ")),
+                   self.pw.get_all_same_element(input("Enter same element to get: ")),
+                   self.pw.get_all_element(input("Enter an element to get"))]
+
+        if(choice == 1):
+            choices[0]
+        elif(choice == 2):
+            choices[1]
+        elif(choice == 3):
+            choices[2]
+        elif(choice == 4):
+            choices[0]
+        elif(choice == 5):
+            choices[1]
+        elif(choice == 6):
+            choices[2]
+        elif(choice == 7):
+            choices[0]
+        elif(choice == 8):
+            choices[1]
+        elif(choice == 9):
+            choices[2]
+        elif(choice == 10):
+            self.pw.get_all()
+        else:
+            print("Invalid choice, try again")
+
 
 
 

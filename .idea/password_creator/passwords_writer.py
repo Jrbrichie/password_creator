@@ -24,6 +24,14 @@ class Passwords_Writer:
     def save_password_combination(self, password, email, url):
         self.writer.writerow(password + ',' + email + ',' + url)
 
+    # gets the password combination
+    def get_password_combination(self, url):
+        if(self.pc.valid_website_url(url)):
+            for row in self.pd_reader:
+                if url in row:
+                    print(row)
+                    break
+
     # deletes password from password.txt using wesbite url
     def delete_password_cobination(self, url):
         if(self.pc.valid_website_url(url)):
@@ -32,6 +40,7 @@ class Passwords_Writer:
                 if url in self.reader:
                     # reads csv file using the pandas module, searches the URL row and deletes the row contianing url
                     self.pd_reader.set_index("URLs", inplace=True).drop(url)
+                    break
                 i += 1
 
     # deletes all password combinations with the same password
@@ -68,6 +77,7 @@ class Passwords_Writer:
         for j in self.pd_col_reader[col_name]:
             if j == str:
                 return i
+                break
             i += 1
 
 
@@ -124,6 +134,11 @@ class Passwords_Writer:
             return column
         else:
             return "Column list is empty"
+
+    # gets entire list of password combinations
+    def get_all(self):
+        for row in self.pd_reader:
+            print(row)
 
     # checks for duplicate passwords
     def has_duplicates(self, url):
