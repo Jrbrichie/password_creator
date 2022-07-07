@@ -262,6 +262,9 @@ class Password_Creator:
         else:
             print("Invalid choice, try again")
 
+    # executes the delete functions
+
+
 
 
 
